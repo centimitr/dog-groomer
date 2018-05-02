@@ -22,6 +22,6 @@ export class AppComponent {
     {href: '/', text: 'Feature - Email notification'},
   ];
 
-  constructor(private session: SessionService, private goto: GotoService) {
+  constructor(public session: SessionService, public goto: GotoService) {
   }
 }

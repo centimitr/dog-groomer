@@ -10,7 +10,7 @@ export class LoginComponent implements OnInit {
 
   phase = 0;
 
-  constructor(private goto: GotoService) {
+  constructor(public goto: GotoService) {
   }
 
   ngOnInit() {
