@@ -1,0 +1,27 @@
+<div class="page">
+  <section class="page-container page-container-narrow">
+
+    <h2>Sign in</h2>
+    <div class="description">Login to manage your appointments.</div>
+
+    <ng-container [ngSwitch]="phase">
+      <div *ngSwitchCase="0" class="form-control">
+        <input type="email" placeholder="someone@example.com">
+        <button class="btn" type="button" (click)="phase=1">Next</button>
+      </div>
+
+      <div *ngSwitchCase="1">
+        <div class="form-control">
+          <input type="password" placeholder="password">
+          <div class="flex-row">
+            <button class="btn" type="button" (click)="phase=0">Back</button>
+            <button class="btn" type="button" (click)="submitLoginInfo()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="login-page-hint" (click)="goto.register()"><a>No account? get one.</a></div>
+
+  </section>
+</div>

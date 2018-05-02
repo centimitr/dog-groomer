@@ -1,0 +1,24 @@
+<ng-container [ngSwitch]="session.role">
+  <!-- default index-->
+  <section *ngSwitchCase="'visitor'" class="flex-column">
+    <section class="flex-row">
+      <section style="width: 50%;"></section>
+      <section style="padding: 320px 0 380px 0;">
+        <div style="font-family: 'Baskerville',serif; font-size: 52px;margin-bottom: 28px;">
+          <div style="font-size: 1.3em">Tom's</div>
+          <div>On-site Grooming</div>
+        </div>
+        <div style="text-decoration: underline;font-size: 28px; padding-left: 4px;cursor: pointer;">
+          <a href="/book">Book Now!</a>
+        </div>
+      </section>
+    </section>
+    <section style="height: 520px; background: #222;">
+    </section>
+  </section>
+  <!-- user list -->
+  <app-timeline *ngSwitchCase="'user'"></app-timeline>
+  <!-- groomer list -->
+  <app-timeline *ngSwitchCase="'groomer'"></app-timeline>
+</ng-container>
+{{session | json}}
