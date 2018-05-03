@@ -10,6 +10,9 @@ import {SessionService} from '../session.service'
 })
 export class LoginComponent extends LoginPhaser implements OnInit {
 
+  submitting = false
+  notMatch = false
+
   constructor(public goto: GotoService, public session: SessionService) {
     super()
   }
@@ -17,9 +20,21 @@ export class LoginComponent extends LoginPhaser implements OnInit {
   ngOnInit() {
   }
 
-  async submit() {
+  protected async handleSubmit() {
     await this.session.login(this.account.email, this.account.password)
-    this.goto.home().then()
+  }
+
+  async submit() {
+    this.submitting = true
+    try {
+      await this.handleSubmit()
+      this.goto.home().then()
+    } catch (e) {
+      this.resetPhase()
+      this.notMatch = true
+      this.account.password = null
+    }
+    this.submitting = false
   }
 
 }

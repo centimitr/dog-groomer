@@ -47,6 +47,7 @@ input {
   width: 100%;
   max-width: 720px;
   padding: 48px 52px;
+  position: relative;
 }
 
 .page .page-container.page-container-narrow {

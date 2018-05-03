@@ -12,20 +12,35 @@
       </ng-container>
     </ng-container>
 
+    <div *ngIf="notMatch"
+         style="line-height: 14px; height: 14px;margin: -22px 0 8px 0; font-size: 13px; color: #e84e17;">
+      Password not
+      match; or account not exists.
+    </div>
+
     <ng-container [ngSwitch]="phase">
 
-      <form *ngSwitchCase="0" class="form-control" (submit)="nextPhase()">
-        <input type="email" placeholder="someone@example.com" required autofocus
-               email #email="ngModel" name="email" [(ngModel)]="account.email">
-        <input class="btn" type="submit" [disabled]="email.invalid" value="Next"/>
+      <form *ngSwitchCase="0" class="form-control" (submit)="email.valid&&nextPhase()">
+        <input type="email" placeholder="someone@example.com" name="email"
+               required autofocus email
+               pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
+               autocomplete="email"
+               (keyup)="notMatch=false"
+               #email="ngModel" [(ngModel)]="account.email">
+        <button class="btn" type="submit" [disabled]="email.invalid">Next</button>
       </form>
 
       <form *ngSwitchCase="1" class="form-control" (submit)="submit().then()">
-        <input type="password" placeholder="password" autocomplete="current-password" minlength="4" maxlength="20"
-               required autofocus #password="ngModel" name="password" [(ngModel)]="account.password">
+        <input type="password" placeholder="password" name="password"
+               minlength="4" maxlength="20" required autofocus
+               (keyup)="notMatch=false"
+               [autocomplete]="type === 'login'? 'current-password': 'new-password'"
+               #password="ngModel" [(ngModel)]="account.password">
         <div class="flex-row">
-          <button class="btn" type="button" (click)="prevPhase()">Back</button>
-          <input class="btn" type="submit" [disabled]="password.invalid" value="Submit"/>
+          <button class="btn" type="button" (click)="prevPhase()" [disabled]="submitting">Back</button>
+          <button class="btn" type="submit" [disabled]="password.invalid||submitting">
+            {{submitting?(type==='login'?'Signing in...': 'Signing up...'):'Submit'}}
+          </button>
         </div>
       </form>
 

@@ -30,4 +30,8 @@ export class GotoService {
   profile() {
     return this.goto('profile')
   }
+
+  error() {
+    return this.goto('error')
+  }
 }

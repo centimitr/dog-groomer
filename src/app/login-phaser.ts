@@ -16,12 +16,16 @@ export class LoginPhaser {
     this.phase--
   }
 
-  is(v) {
+  isPhase(v) {
     return this.phase === v
   }
 
-  not(v) {
-    return !this.is(v)
+  notPhase(v) {
+    return !this.isPhase(v)
+  }
+
+  resetPhase() {
+    this.phase = 0
   }
 
 }

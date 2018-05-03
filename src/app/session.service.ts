@@ -25,6 +25,13 @@ export class SessionService {
     })
   }
 
+  requireLogin() {
+    if (this.isLoggedIn()) {
+      return
+    }
+    this.goto.error().then()
+  }
+
   isLoggedIn() {
     return ['client', 'groomer'].includes(this.role)
   }
