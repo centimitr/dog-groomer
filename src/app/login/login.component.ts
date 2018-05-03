@@ -1,23 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {GotoService} from '../goto.service';
+import {Component, OnInit} from '@angular/core'
+import {GotoService} from '../goto.service'
+import {LoginPhaser} from '../login-phaser'
+import {SessionService} from '../session.service'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends LoginPhaser implements OnInit {
 
-  phase = 0;
-
-  constructor(public goto: GotoService) {
+  constructor(public goto: GotoService, public session: SessionService) {
+    super()
   }
 
   ngOnInit() {
   }
 
-  submitLoginInfo() {
-    this.goto.home().then();
+  async submit() {
+    await this.session.login(this.account.email, this.account.password)
+    this.goto.home().then()
   }
 
 }

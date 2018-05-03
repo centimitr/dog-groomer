@@ -13,9 +13,13 @@
     (click)="goto.home().then()">
     Tom's Grooming
   </div>
-  <div class="session-bar" [ngSwitch]="session.role">
-    <button *ngSwitchCase="'visitor'" (click)="goto.login().then()">login</button>
-    <button *ngSwitchDefault>username</button>
+  <div class="session-bar">
+    <button *ngIf="!session.isLoggedIn()" (click)="goto.login().then()">login</button>
+    <ng-container *ngIf="session.isLoggedIn()">
+      <button (click)="goto.home().then()">Dashboard</button>
+      <button (click)="goto.profile().then()">{{session.user.email}}</button>
+      <button (click)="session.logout().then()">Sign out</button>
+    </ng-container>
   </div>
 </section>
 <router-outlet id="main"></router-outlet>

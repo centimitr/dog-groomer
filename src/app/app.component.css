@@ -22,7 +22,11 @@ ul.tmp {
   padding: 0 24px;
   background: none;
   border: none;
-  transition: background-color 250ms;
+  transition: background-color 225ms;
+}
+
+.session-bar button + button {
+  margin-left: 0;
 }
 
 .session-bar button:hover {

@@ -1,27 +1,38 @@
 <div class="page">
   <section class="page-container page-container-narrow">
 
-    <h2>Sign in</h2>
-    <div class="description">Login to manage your appointments.</div>
-
-    <ng-container [ngSwitch]="phase">
-      <div *ngSwitchCase="0" class="form-control">
-        <input type="email" placeholder="someone@example.com">
-        <button class="btn" type="button" (click)="phase=1">Next</button>
-      </div>
-
-      <div *ngSwitchCase="1">
-        <div class="form-control">
-          <input type="password" placeholder="password">
-          <div class="flex-row">
-            <button class="btn" type="button" (click)="phase=0">Back</button>
-            <button class="btn" type="button" (click)="submitLoginInfo()">Submit</button>
-          </div>
-        </div>
-      </div>
+    <ng-container [ngSwitch]="type">
+      <ng-container *ngSwitchCase="'login'">
+        <h2>Sign in</h2>
+        <div class="description">Login to manage your appointments.</div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'register'">
+        <h2>Create account</h2>
+        <div class="description">Register an account to book service.</div>
+      </ng-container>
     </ng-container>
 
-    <div class="login-page-hint" (click)="goto.register()"><a>No account? get one.</a></div>
+    <ng-container [ngSwitch]="phase">
+
+      <form *ngSwitchCase="0" class="form-control" (submit)="nextPhase()">
+        <input type="email" placeholder="someone@example.com" required autofocus
+               email #email="ngModel" name="email" [(ngModel)]="account.email">
+        <input class="btn" type="submit" [disabled]="email.invalid" value="Next"/>
+      </form>
+
+      <form *ngSwitchCase="1" class="form-control" (submit)="submit().then()">
+        <input type="password" placeholder="password" autocomplete="current-password" minlength="4" maxlength="20"
+               required autofocus #password="ngModel" name="password" [(ngModel)]="account.password">
+        <div class="flex-row">
+          <button class="btn" type="button" (click)="prevPhase()">Back</button>
+          <input class="btn" type="submit" [disabled]="password.invalid" value="Submit"/>
+        </div>
+      </form>
+
+    </ng-container>
+
+    <div *ngIf="type==='login'" class="login-page-hint" (click)="goto.register().then()"><a>No account? Get one.</a>
+    </div>
 
   </section>
 </div>

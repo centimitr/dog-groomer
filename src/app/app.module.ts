@@ -9,8 +9,14 @@ import {BookComponent} from './book/book.component';
 import {LoginComponent} from './login/login.component';
 import {SessionService} from './session.service';
 import {TimelineComponent} from './timeline/timeline.component';
-import {RegisterComponent} from './register/register.component';
+import {RegisterComponent} from './login/register/register.component';
 import {GotoService} from './goto.service';
+import {FormsModule} from '@angular/forms';
+import {AngularFireModule} from 'angularfire2';
+import {AngularFirestore, AngularFirestoreModule} from 'angularfire2/firestore';
+import {environment} from '../environments/environment';
+import {AngularFireAuthModule} from 'angularfire2/auth';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +26,17 @@ import {GotoService} from './goto.service';
     LoginComponent,
     RegisterComponent,
     TimelineComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule
   ],
-  providers: [SessionService, GotoService],
+  providers: [SessionService, GotoService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule {

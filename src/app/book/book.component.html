@@ -1,3 +1,62 @@
-<p>
-  book works!
-</p>
+<!--suppress JSUnresolvedVariable -->
+<div class="page">
+  <section class="page-container">
+
+
+    <ng-container [ngSwitch]="session.role">
+
+      <ng-container *ngSwitchCase="'visitor'">
+        <div class=""></div>
+        <div>You need login to book a service.</div>
+        <div (click)="goto.login().then()"><a>Turn to login page at once.</a></div>
+      </ng-container>
+
+      <ng-container *ngSwitchDefault [ngSwitch]="phase">
+
+        <h2>Book service</h2>
+        <div class="description">Make an appointment for a suitable on-site service.</div>
+
+        <div *ngSwitchCase="0" class="form-control">
+
+          <section class="group">
+            <div class="group-name">Select dog</div>
+            <div class="flex-row dog-list">
+              <div class="dog" *ngFor="let dog of session.dogs">
+                <img class="dog-image" src="" alt="">
+                <div class="dog-name">dog</div>
+              </div>
+            </div>
+            <div [hidden]="session.dogs.length!=0" class="flex-column"
+                 style="align-items: center; justify-content: center; height: 68px;">
+              <div style="line-height: 38px; color: #888;"> No dogs recorded.</div>
+              <div><a>Add a dog</a></div>
+            </div>
+          </section>
+
+
+          <section class="group">
+            <div class="group-name">Select time</div>
+          </section>
+
+          <section class="group">
+            <div class="group-name">note</div>
+            <input type="email" placeholder="someone@example.com">
+          </section>
+
+          <button class="btn" type="button" (click)="nextPhase()">Next</button>
+        </div>
+
+        <div *ngSwitchCase="1">
+          <div class="form-control">
+            <input type="password" placeholder="password">
+            <div class="flex-row">
+              <button class="btn" type="button" (click)="prevPhase()">Back</button>
+              <button class="btn" type="button" (click)="submitLoginInfo()">Submit</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+
+  </section>
+</div>

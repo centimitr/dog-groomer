@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SessionService} from '../session.service';
+import {GotoService} from '../goto.service';
 
 @Component({
   selector: 'app-index',
@@ -8,7 +9,7 @@ import {SessionService} from '../session.service';
 })
 export class IndexComponent implements OnInit {
 
-  constructor(public session: SessionService) {
+  constructor(public session: SessionService, public goto: GotoService) {
   }
 
   ngOnInit() {

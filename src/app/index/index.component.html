@@ -9,7 +9,7 @@
           <div>On-site Grooming</div>
         </div>
         <div style="text-decoration: underline;font-size: 28px; padding-left: 4px;cursor: pointer;">
-          <a href="/book">Book Now!</a>
+          <a (click)="goto.book().then()">Book Now!</a>
         </div>
       </section>
     </section>
@@ -17,8 +17,7 @@
     </section>
   </section>
   <!-- user list -->
-  <app-timeline *ngSwitchCase="'user'"></app-timeline>
+  <app-timeline *ngSwitchCase="'client'"></app-timeline>
   <!-- groomer list -->
   <app-timeline *ngSwitchCase="'groomer'"></app-timeline>
 </ng-container>
-{{session | json}}

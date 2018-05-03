@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core'
+import {SessionService} from '../session.service'
 
 @Component({
   selector: 'app-timeline',
@@ -7,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TimelineComponent implements OnInit {
 
-  constructor() {
+  constructor(public session: SessionService) {
   }
 
   ngOnInit() {

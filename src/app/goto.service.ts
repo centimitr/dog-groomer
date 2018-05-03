@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import {Injectable} from '@angular/core'
+import {Router} from '@angular/router'
 
 @Injectable()
 export class GotoService {
@@ -8,23 +8,26 @@ export class GotoService {
   }
 
   async goto(...commands) {
-    return this.router.navigate(commands);
+    return this.router.navigate(commands)
   }
 
   home() {
-    return this.goto('');
+    return this.goto('')
   }
 
   login() {
-    return this.goto('login');
+    return this.goto('login')
   }
 
   register() {
-    return this.goto('register');
+    return this.goto('register')
   }
 
   book() {
-    return this.goto('book');
+    return this.goto('book')
   }
 
+  profile() {
+    return this.goto('profile')
+  }
 }
