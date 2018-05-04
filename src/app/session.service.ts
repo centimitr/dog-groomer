@@ -10,17 +10,24 @@ export class SessionService {
   role = null
   user = {}
   dogs = []
+  redirectToLogin = false
 
   constructor(public db: AngularFirestore, public auth: AngularFireAuth, public goto: GotoService) {
     auth.authState.subscribe({
       next: user => {
         if (!user) {
           this.role = 'visitor'
+          if (this.redirectToLogin) {
+            this.redirectToLogin = false
+            this.goto.login().then()
+            return
+          }
           this.goto.home().then()
           return
         }
         this.role = 'client'
         this.user = user
+        console.log(this.user)
       }
     })
   }
@@ -29,7 +36,11 @@ export class SessionService {
     if (this.isLoggedIn()) {
       return
     }
-    this.goto.error().then()
+    if (this.role === null) {
+      this.redirectToLogin = true
+    } else {
+      this.goto.error().then()
+    }
   }
 
   isLoggedIn() {

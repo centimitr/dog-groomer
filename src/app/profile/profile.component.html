@@ -6,6 +6,32 @@
     <h2>Profile</h2>
     <div class="description">Record your and your dogs' information.</div>
 
+    <section *ngIf="session.user">
+      <h3>Session</h3>
+      <table>
+        <tr>
+          <td>Email</td>
+          <td>{{session.user.email}}</td>
+        </tr>
+        <tr>
+          <td>Email Verified</td>
+          <td>{{session.user.emailVerified}}</td>
+        </tr>
+        <tr>
+          <td>Phone</td>
+          <td>{{session.user.phoneNumber}}</td>
+        </tr>
+        <tr>
+        <tr>
+          <td>Last Login</td>
+          <td>{{session.user?.metadata?.lastSignInTime}}</td>
+        </tr>
+        <tr>
+          <td>Register</td>
+          <td>{{session.user?.metadata?.creationTime}}</td>
+        </tr>
+      </table>
+    </section>
 
   </section>
 </div>

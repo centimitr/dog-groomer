@@ -24,7 +24,7 @@
         <input type="email" placeholder="someone@example.com" name="email"
                required autofocus email
                pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
-               autocomplete="email"
+               autocomplete="username"
                (keyup)="notMatch=false"
                #email="ngModel" [(ngModel)]="account.email">
         <button class="btn" type="submit" [disabled]="email.invalid">Next</button>

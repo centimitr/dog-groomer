@@ -8,6 +8,18 @@ import {SessionService} from '../session.service'
 })
 export class TimelineComponent implements OnInit {
 
+  items = [{
+    kind: 'Alaska',
+    date: 'Friday, 4 May 2018',
+    timeSlot: '14:00 - 18:00',
+    services: [
+      'normal groom',
+      'normal groom',
+      'normal groom',
+      'normal groom'
+    ]
+  }]
+
   constructor(public session: SessionService) {
   }
 
