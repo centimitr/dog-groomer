@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
+import {ProfilePhone} from '../../session.service'
 
 @Component({
   selector: 'app-editable-item',
@@ -6,7 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
   styleUrls: ['./editable-item.component.css']
 })
 export class EditableItemComponent implements OnInit {
-  _value: string
+  _value: any
 
   @Input() label: string
   @Input() type: string
@@ -17,7 +18,7 @@ export class EditableItemComponent implements OnInit {
     return this._value
   }
 
-  set value(v: string) {
+  set value(v: any) {
     this._value = v
     this.valueChange.emit(v)
   }
@@ -28,6 +29,21 @@ export class EditableItemComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  canAddItem() {
+    // return !this.value.filter(v => !v.name || v.number).length
+    return true
+  }
+
+  addItem() {
+    if (this.canAddItem()) {
+      this.value.push(new ProfilePhone())
+    }
+  }
+
+  removeItem(item) {
+    this.value = this.value.filter(v => v !== item)
   }
 
 }

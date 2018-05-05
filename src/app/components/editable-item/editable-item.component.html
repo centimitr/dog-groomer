@@ -4,19 +4,9 @@
 
   <ng-container [ngSwitch]="type">
 
-    <ng-container *ngSwitchCase="'phone'">
-      <!--<input *ngIf="editable" type="text" [title]="label" [(ngModel)]="value">-->
-      <ng-container *ngIf="!editable">
-        <ng-container *ngIf="loaded">
-          <!--<span class="value" *ngIf="value">{{value}}</span>-->
-          <!--<span class="value null-value" *ngIf="!value">-</span>-->
-        </ng-container>
-        <div class="value" style="width: 120px;" *ngIf="!loaded"></div>
-      </ng-container>
-    </ng-container>
-
+    <!-- single string -->
     <ng-container *ngSwitchDefault>
-      <input *ngIf="editable" type="text" [title]="label" [(ngModel)]="value">
+      <input *ngIf="editable" type="text" [title]="label" [(ngModel)]="value" style="max-width: 265px;">
       <ng-container *ngIf="!editable">
         <ng-container *ngIf="loaded">
           <span class="value" *ngIf="value">{{value}}</span>
@@ -24,6 +14,42 @@
         </ng-container>
         <div class="value" style="width: 120px;" *ngIf="!loaded"></div>
       </ng-container>
+    </ng-container>
+
+    <!-- multi typed strings -->
+    <ng-container *ngSwitchCase="'phone'">
+      <!--<input *ngIf="editable" type="text" [title]="label" [(ngModel)]="value">-->
+
+      <table *ngIf="editable">
+        <tr *ngFor="let item of value">
+          <td class="phone-name">
+            <input type="text" [title]="name" [(ngModel)]="item.name" style="max-width: 65px">
+          </td>
+          <td class="phone-number">
+            <input type="text" [title]="number" [(ngModel)]="item.number" style="max-width: 265px">
+          </td>
+          <td class="remove-button" (click)="removeItem(item)">
+            <button type="button">remove</button>
+          </td>
+        </tr>
+        <tr>
+          <td (click)="addItem()"><a>Add new record</a></td>
+        </tr>
+      </table>
+
+      <ng-container *ngIf="!editable">
+        <ng-container *ngIf="loaded">
+
+          <tr *ngFor="let item of value">
+            <td style="padding-right: 28px" class="value">{{item.name}}</td>
+            <td class="value">{{item.number}}</td>
+          </tr>
+
+          <span class="value null-value" *ngIf="!value || value.length == 0">-</span>
+        </ng-container>
+        <div class="value" style="width: 120px;" *ngIf="!loaded"></div>
+      </ng-container>
+
     </ng-container>
 
   </ng-container>

@@ -3,9 +3,9 @@
   <section class="page-container profile">
 
     <h2>
-      <span [class.inactive]="tab!=0" (click)="tab=0">Profile</span>
+      <span class="tab" [class.inactive]="tab!=0" (click)="tab=0">Profile</span>
       <span class="inactive" style="margin: 0 4px; transform: scale(.2); font-weight: normal">|</span>
-      <span [class.inactive]="tab!=1" (click)="tab=1">Dogs</span>
+      <span class="tab" [class.inactive]="tab!=1" (click)="tab=1">Dogs</span>
     </h2>
 
     <ng-container [ngSwitch]="tab">
@@ -13,7 +13,7 @@
       <section *ngSwitchCase="1">
 
         <!--<h2 style="margin-top: 48px;">Dogs Profile</h2>-->
-        <div class="description">Choose a dog and edit its profile.</div>
+        <div class="description">Provide his or her information :D</div>
         <app-dog-list style="width: 100%;" [dogs]="profile.dogs" [loaded]="loaded" [(selected)]="dog"
                       (add)="addDog()"></app-dog-list>
 
@@ -50,7 +50,7 @@
 
       <form *ngSwitchDefault (submit)="editOrUpdate()">
         <!--<h2>Profile</h2>-->
-        <div class="description">Record your and your dogs' information.</div>
+        <div class="description">Record your information so we can find you.</div>
 
         <app-editable-item label="Full Name"
                            [(value)]="profile.fullname"
@@ -69,7 +69,7 @@
         </app-editable-item>
         <app-editable-item label="Phones"
                            [type]="'phone'"
-                           [(value)]="profile.address"
+                           [(value)]="profile.phones"
                            [editable]="editable"
                            [loaded]="loaded">
         </app-editable-item>

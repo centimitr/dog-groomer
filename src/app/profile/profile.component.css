@@ -5,6 +5,10 @@
   opacity: .6;
 }
 
+.profile .tab {
+  cursor: pointer;
+}
+
 .profile > *:last-child {
   margin-bottom: 28px;
 }
