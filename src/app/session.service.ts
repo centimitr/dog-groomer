@@ -1,46 +1,53 @@
 import {Injectable} from '@angular/core'
 import {AngularFirestore} from 'angularfire2/firestore'
 import {AngularFireAuth} from 'angularfire2/auth'
-import * as firebase from 'firebase'
 import {GotoService} from './goto.service'
+import {Lock} from './lock'
+import * as firebase from 'firebase'
+import {firestore} from 'firebase'
+import {AngularFirestoreDocument} from 'angularfire2/firestore/document/document'
 
 @Injectable()
 export class SessionService {
 
-  role = null
-  user = {}
-  dogs = []
-  redirectToLogin = false
+  role
+  user: firebase.UserInfo
+  loginLock = new Lock(true)
 
-  constructor(public db: AngularFirestore, public auth: AngularFireAuth, public goto: GotoService) {
-    auth.authState.subscribe({
+  // redirectToLogin = false
+
+  constructor(public afs: AngularFirestore, public _auth: AngularFireAuth, public goto: GotoService) {
+    this._auth.authState.subscribe({
       next: user => {
         if (!user) {
           this.role = 'visitor'
-          if (this.redirectToLogin) {
-            this.redirectToLogin = false
-            this.goto.login().then()
-            return
-          }
+          // if (this.redirectToLogin) {
+          //   this.redirectToLogin = false
+          //   this.goto.login().then()
+          //   return
+          // }
           this.goto.home().then()
           return
         }
         this.role = 'client'
         this.user = user
         console.log(this.user)
+        console.log(0)
+        this.loginLock.unlock()
       }
     })
   }
 
-  requireLogin() {
+  async requireLogin() {
+    await this.loginLock.wait()
     if (this.isLoggedIn()) {
       return
     }
-    if (this.role === null) {
-      this.redirectToLogin = true
-    } else {
-      this.goto.error().then()
-    }
+    // if (this.role === null) {
+    //   this.redirectToLogin = true
+    // } else {
+    this.goto.error().then()
+    // }
   }
 
   isLoggedIn() {
@@ -48,16 +55,52 @@ export class SessionService {
   }
 
   async logout() {
-    await this.auth.auth.signOut()
+    await this._auth.auth.signOut()
   }
 
   async login(email, password) {
-    const res = await this.auth.auth.signInWithEmailAndPassword(email, password)
-    console.log(res)
+    await this._auth.auth.signInWithEmailAndPassword(email, password)
   }
 
   async register(email, password) {
-    const res = await this.auth.auth.createUserWithEmailAndPassword(email, password)
+    await this._auth.auth.createUserWithEmailAndPassword(email, password)
   }
 
+  async wait() {
+    await this.loginLock.wait()
+  }
+
+  profile() {
+    // IvyX6cxzl6QTkfvthMlA
+    return this.afs.collection('users').doc(this.user.uid)
+  }
+
+}
+
+
+export class Profile {
+  fullname = ''
+  nickname = ''
+  address = ''
+  phones: ProfilePhone[] = []
+  dogs: ProfileDog[] = []
+
+  static object(p: Profile) {
+    const o = Object.assign({}, p)
+    o.phones = p.phones.map(item => Object.assign({}, item))
+    o.dogs = p.dogs.map(item => Object.assign({}, item))
+    return o
+  }
+}
+
+
+export class ProfileDog {
+  name = ''
+  breed = ''
+  dob = ''
+}
+
+export class ProfilePhone {
+  name = ''
+  number = ''
 }

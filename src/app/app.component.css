@@ -11,10 +11,28 @@ ul.tmp {
   background-color: white;
 }
 
+/*
+  left
+*/
+.logo {
+  height: 100%;
+  line-height: 68px;
+  padding: 0 16px;
+  font-family: Baskerville, serif;
+  font-size: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/*
+  right
+*/
+
 .session-bar {
   display: flex;
   flex-flow: row nowrap;
   height: 100%;
+  overflow-x: auto;
 }
 
 .session-bar button {

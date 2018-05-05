@@ -1,37 +1,83 @@
 <!--suppress JSUnresolvedVariable -->
 <div class="page">
-  <section class="page-container">
+  <section class="page-container profile">
 
+    <h2>
+      <span [class.inactive]="tab!=0" (click)="tab=0">Profile</span>
+      <span class="inactive" style="margin: 0 4px; transform: scale(.2); font-weight: normal">|</span>
+      <span [class.inactive]="tab!=1" (click)="tab=1">Dogs</span>
+    </h2>
 
-    <h2>Profile</h2>
-    <div class="description">Record your and your dogs' information.</div>
+    <ng-container [ngSwitch]="tab">
 
-    <section *ngIf="session.user">
-      <h3>Session</h3>
-      <table>
-        <tr>
-          <td>Email</td>
-          <td>{{session.user.email}}</td>
-        </tr>
-        <tr>
-          <td>Email Verified</td>
-          <td>{{session.user.emailVerified}}</td>
-        </tr>
-        <tr>
-          <td>Phone</td>
-          <td>{{session.user.phoneNumber}}</td>
-        </tr>
-        <tr>
-        <tr>
-          <td>Last Login</td>
-          <td>{{session.user?.metadata?.lastSignInTime}}</td>
-        </tr>
-        <tr>
-          <td>Register</td>
-          <td>{{session.user?.metadata?.creationTime}}</td>
-        </tr>
-      </table>
-    </section>
+      <section *ngSwitchCase="1">
+
+        <!--<h2 style="margin-top: 48px;">Dogs Profile</h2>-->
+        <div class="description">Choose a dog and edit its profile.</div>
+        <app-dog-list style="width: 100%;" [dogs]="profile.dogs" [loaded]="loaded" [(selected)]="dog"
+                      (add)="addDog()"></app-dog-list>
+
+        <div class="flex-row" *ngIf="dog">
+          <form style="margin-top: 38px">
+
+            <app-editable-item label="Name"
+                               [(value)]="dog.name"
+                               [editable]="dogEditable"
+                               [loaded]="loaded">
+            </app-editable-item>
+            <app-editable-item label="Breed"
+                               [(value)]="dog.breed"
+                               [editable]="dogEditable"
+                               [loaded]="loaded">
+            </app-editable-item>
+            <app-editable-item label="Date of Birth"
+                               [(value)]="dog.dob"
+                               [editable]="dogEditable"
+                               [loaded]="loaded">
+            </app-editable-item>
+
+            <div class="flex-row">
+              <button class="btn" style="padding: 0 24px; flex: 0;" (click)="editOrUpdateDog()">
+                {{dogEditable?'Save':'Edit'}}
+              </button>
+              <button class="btn" style="padding: 0 24px; flex: 0;" (click)="removeDog()">Remove</button>
+            </div>
+
+          </form>
+        </div>
+
+      </section>
+
+      <form *ngSwitchDefault (submit)="editOrUpdate()">
+        <!--<h2>Profile</h2>-->
+        <div class="description">Record your and your dogs' information.</div>
+
+        <app-editable-item label="Full Name"
+                           [(value)]="profile.fullname"
+                           [editable]="editable"
+                           [loaded]="loaded">
+        </app-editable-item>
+        <app-editable-item label="Nickname"
+                           [(value)]="profile.nickname"
+                           [editable]="editable"
+                           [loaded]="loaded">
+        </app-editable-item>
+        <app-editable-item label="Home address"
+                           [(value)]="profile.address"
+                           [editable]="editable"
+                           [loaded]="loaded">
+        </app-editable-item>
+        <app-editable-item label="Phones"
+                           [type]="'phone'"
+                           [(value)]="profile.address"
+                           [editable]="editable"
+                           [loaded]="loaded">
+        </app-editable-item>
+
+        <button class="btn" style="padding: 0 24px;" type="submit">{{editable?'Save':'Edit'}}</button>
+      </form>
+
+    </ng-container>
 
   </section>
 </div>

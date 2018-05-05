@@ -36,5 +36,4 @@ export class LoginComponent extends LoginPhaser implements OnInit {
     }
     this.submitting = false
   }
-
 }

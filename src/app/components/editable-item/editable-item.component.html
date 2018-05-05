@@ -1,0 +1,31 @@
+<!--suppress HtmlFormInputWithoutLabel -->
+<div class="control-form">
+  <label>{{label}}</label>
+
+  <ng-container [ngSwitch]="type">
+
+    <ng-container *ngSwitchCase="'phone'">
+      <!--<input *ngIf="editable" type="text" [title]="label" [(ngModel)]="value">-->
+      <ng-container *ngIf="!editable">
+        <ng-container *ngIf="loaded">
+          <!--<span class="value" *ngIf="value">{{value}}</span>-->
+          <!--<span class="value null-value" *ngIf="!value">-</span>-->
+        </ng-container>
+        <div class="value" style="width: 120px;" *ngIf="!loaded"></div>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchDefault>
+      <input *ngIf="editable" type="text" [title]="label" [(ngModel)]="value">
+      <ng-container *ngIf="!editable">
+        <ng-container *ngIf="loaded">
+          <span class="value" *ngIf="value">{{value}}</span>
+          <span class="value null-value" *ngIf="!value">-</span>
+        </ng-container>
+        <div class="value" style="width: 120px;" *ngIf="!loaded"></div>
+      </ng-container>
+    </ng-container>
+
+  </ng-container>
+
+</div>

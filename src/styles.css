@@ -4,6 +4,7 @@
   padding: 0;
   user-select: none;
   cursor: default;
+  outline: none;
 }
 
 body {
@@ -44,7 +45,7 @@ input {
   border: 1px solid #dddddd;
   /*border-radius: 16px;*/
   background-color: white;
-  width: 100%;
+  width: 100vw;
   max-width: 720px;
   padding: 48px 52px;
   position: relative;
@@ -122,6 +123,15 @@ button, input[type='button'], input[type='reset'], input[type='submit'] {
   border: 1px solid #ddd;
   cursor: pointer;
   transition: all 250ms;
+}
+
+button:hover {
+  background: #bbb;
+  transition: none;
+}
+
+button:active {
+  background: #aaa;
 }
 
 button:disabled, input[type='button']:disabled, input[type='reset']:disabled, input[type='submit']:disabled {

@@ -1,0 +1,29 @@
+.control-form {
+  display: flex;
+  flex-flow: column wrap;
+  margin-bottom: 18px;
+}
+
+.control-form label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.control-form input {
+  outline: none;
+  height: 34px;
+  padding: 0 8px;
+  font-size: 14px;
+  color: #777777;
+}
+
+.control-form .value {
+  height: 34px;
+  line-height: 34px;
+  color: #888888;
+}
+
+.control-form .value.null-value {
+  color: #aaaaaa;
+}

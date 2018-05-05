@@ -1,0 +1,33 @@
+.dog-list {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.dog {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px 16px 0;
+}
+
+.dog.selected {
+  transform: scale(1.05);
+}
+
+.dog-avatar {
+  height: 64px;
+  width: 64px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.dog-name {
+  line-height: 16px;
+  color: #666666;
+  max-width: 96px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

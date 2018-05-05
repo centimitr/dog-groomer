@@ -1,0 +1,23 @@
+<ng-container *ngIf="loaded">
+  <div class="flex-row dog-list" *ngIf="dogs.length">
+    <div class="dog" *ngFor="let dog of dogs" (click)="onClick(dog)"
+         [class.selected]="selected==dog">
+      <!--<img class="dog-image" src="" alt="">-->
+      <div class="dog-avatar"></div>
+      <div class="dog-name">{{dog.name || '?'}}</div>
+      <!--<div class="dog-name" style="color: #666666;">{{dog.breed}}</div>-->
+    </div>
+    <div class="dog" style="width: 64px;height: 64px;" (click)="add.emit()">
+      <div class="dog-name"><a>Add</a></div>
+    </div>
+  </div>
+  <div *ngIf="!dogs.length" (click)="add.emit()"
+       class="flex-column"
+       style="align-items: center; justify-content: center; height: 128px; border: 1px dashed #cccccc;margin-top: 8px; cursor: pointer; ">
+    <div style="pointer-events: none; line-height: 38px; color: #888;"> No dogs recorded.</div>
+    <div style="pointer-events: none"><a>Add a dog</a></div>
+  </div>
+</ng-container>
+<ng-container *ngIf="!loaded">
+  <div style="line-height: 64px; color: #888888;">loading...</div>
+</ng-container>

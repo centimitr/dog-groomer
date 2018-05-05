@@ -1,0 +1,24 @@
+.profile > * {
+}
+
+.profile .inactive {
+  opacity: .6;
+}
+
+.profile > *:last-child {
+  margin-bottom: 28px;
+}
+
+.profile h2 {
+  margin-bottom: 16px;
+}
+
+.profile h3 {
+  margin-top: 22px;
+  margin-bottom: 12px;
+}
+
+.hr {
+  margin: 64px 0;
+  border-bottom: 1px dashed #eeeeee;
+}
