@@ -5,7 +5,92 @@
     <h2>Book service</h2>
     <div class="description">Make an appointment for a suitable on-site service.</div>
 
+    <ng-container [ngSwitch]="phase.phase">
 
+      <!-- Dog -->
+      <form (submit)="phase.next()" *ngSwitchCase="0">
+        <h3>Choose a dog</h3>
+        <app-dog-list style="width: 100%;" [dogs]="profile.dogs" [loaded]="loaded" [(selected)]="dog"
+                      (add)="addDog()"></app-dog-list>
+
+        <div class="dog-chosen">
+          <span *ngIf="dog">You choose to book service for {{dog.name}}.</span>
+        </div>
+
+        <button class="btn" [disabled]="!dog" type="submit">Next</button>
+      </form>
+
+      <!-- Time -->
+      <form *ngSwitchCase="1" (submit)="phase.next()">
+        <h3>Choose appointment time</h3>
+
+        <div class="btns">
+          <button class="btn" (click)="phase.prev()">Prev</button>
+          <button class="btn" type="submit">Next</button>
+        </div>
+      </form>
+
+      <!-- Options -->
+      <form *ngSwitchCase="2" (submit)="phase.next()">
+        <h3>Choose service options</h3>
+        <div class="menu">
+          <div class="group" *ngFor="let group of session.menu">
+            <div class="kind">
+              {{group.kind}}
+            </div>
+            <div class="options">
+              <div class="option" [class.option-active]="options.includes(o.name)" *ngFor="let o of group.options"
+                   (click)="toggleOption(o.name)">
+                {{o.name}}
+              </div>
+            </div>
+          </div>
+          <div class="chosen">You have chosen {{options.length}} services.</div>
+          <button class="btn" [disabled]="!options.length" (click)="options = []">Clear Selection</button>
+        </div>
+
+        <div class="note">
+          <h3>special instructions</h3>
+          <div class="description">Write down something you want to let the groomer know.</div>
+          <textarea title="note" [value]="note" (change)="note=$event.target.value"></textarea>
+        </div>
+
+        <div class="btns">
+          <button class="btn" (click)="phase.prev()">Prev</button>
+          <button class="btn" [disabled]="!options.length" type="submit">Next</button>
+        </div>
+      </form>
+
+      <!-- Summary -->
+      <form *ngSwitchCase="3" (submit)="submit()">
+        <h3>Summary</h3>
+        <table class="summary">
+          <tr>
+            <td class="name">For</td>
+            <td class="value">{{dog.name}}</td>
+          </tr>
+          <tr>
+            <td class="name">Time</td>
+            <td class="value">{{time}}</td>
+          </tr>
+          <tr>
+            <td class="name">Services</td>
+            <td class="value value-list">
+              <div class="value-list-item" *ngFor="let item of options">{{item}}</div>
+            </td>
+          </tr>
+          <tr>
+            <td class="name">Note</td>
+            <td class="value">{{note}}</td>
+          </tr>
+        </table>
+        <div class="btns">
+          <button class="btn" (click)="phase.prev()">Prev</button>
+          <button class="btn" type="submit">Submit</button>
+        </div>
+      </form>
+
+    </ng-container>
 
 
     <!--<section class="group">-->

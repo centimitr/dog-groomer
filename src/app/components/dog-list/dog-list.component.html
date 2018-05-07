@@ -7,9 +7,7 @@
       <div class="dog-name">{{dog.name || '?'}}</div>
       <!--<div class="dog-name" style="color: #666666;">{{dog.breed}}</div>-->
     </div>
-    <div class="dog" style="width: 64px;height: 64px;" (click)="add.emit()">
-      <div class="dog-name"><a>Add</a></div>
-    </div>
+    <div class="dog-add" (click)="add.emit()"><span style="margin-top: -2px">+</span></div>
   </div>
   <div *ngIf="!dogs.length" (click)="add.emit()"
        class="flex-column"

@@ -1,34 +1,20 @@
-import {Component, OnInit} from '@angular/core'
+import {Component} from '@angular/core'
 import {Profile, ProfileDog, SessionService} from '../session.service'
+import {ProfileLoader} from '../profile-loader'
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent extends ProfileLoader {
 
   tab = 0
   editable = false
   dogEditable = false
-  loaded = false
-  profile = new Profile()
-  dog: ProfileDog
-  private _doc
 
   constructor(public session: SessionService) {
-  }
-
-  async ngOnInit() {
-    await this.session.wait()
-    const doc = this.session.profile()
-    doc.valueChanges().subscribe((v: Profile) => {
-      if (v) {
-        this.profile = v
-        this.loaded = true
-      }
-    })
-    this._doc = doc
+    super(session)
   }
 
   updateProfile() {

@@ -17,7 +17,7 @@ a {
   color: royalblue;
 }
 
-input {
+input, textarea {
   user-select: auto;
   cursor: text;
 }
@@ -64,6 +64,12 @@ input {
   font-size: 28px;
   color: #444;
   margin-bottom: 12px;
+}
+
+.page h3 {
+  font-size: 20px;
+  color: #444;
+  margin-bottom: 8px;
 }
 
 .page .description {

@@ -15,6 +15,7 @@
     <button *ngIf="!session.isLoggedIn()" (click)="goto.login().then()">login</button>
     <ng-container *ngIf="session.isLoggedIn()">
       <button (click)="goto.home().then()">Dashboard</button>
+      <button (click)="goto.book().then()" *ngIf="session.role==='client'">Book a service</button>
       <button (click)="goto.profile().then()">{{session.user.email}}</button>
       <button (click)="session.logout().then()">Sign out</button>
     </ng-container>

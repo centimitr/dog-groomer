@@ -13,6 +13,37 @@ export class SessionService {
   role
   user: firebase.UserInfo
   loginLock = new Lock(true)
+  menu = [{
+    kind: 'wash',
+    options: [{
+      id: 'g0',
+      name: 'wash only'
+    }, {
+      id: 'g1',
+      name: 'wash and nail clipping'
+    }, {
+      id: 'g4',
+      name: 'deluxe grooming'
+    }]
+  }, {
+    kind: 'hair style',
+    options: [{
+      id: '00',
+      name: 'short hairstyles'
+    }, {
+      id: '01',
+      name: 'medium hairstyles'
+    }, {
+      id: '02',
+      name: 'long hairstyles'
+    }, {
+      id: '03',
+      name: 'undo & burn hairstyles'
+    }, {
+      id: '04',
+      name: 'braid hairstyles'
+    }]
+  }]
 
   // redirectToLogin = false
 

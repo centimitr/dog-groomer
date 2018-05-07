@@ -18,9 +18,9 @@
       match; or account not exists.
     </div>
 
-    <ng-container [ngSwitch]="phase">
+    <ng-container [ngSwitch]="phase.phase">
 
-      <form *ngSwitchCase="0" class="form-control" (submit)="email.valid&&nextPhase()">
+      <form *ngSwitchCase="0" class="form-control" (submit)="email.valid&&phase.next()">
         <input type="email" placeholder="someone@example.com" name="email"
                required autofocus email
                pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
@@ -37,7 +37,7 @@
                [autocomplete]="type === 'login'? 'current-password': 'new-password'"
                #password="ngModel" [(ngModel)]="account.password">
         <div class="flex-row">
-          <button class="btn" type="button" (click)="prevPhase()" [disabled]="submitting">Back</button>
+          <button class="btn" type="button" (click)="phase.prev()" [disabled]="submitting">Back</button>
           <button class="btn" type="submit" [disabled]="password.invalid||submitting">
             {{submitting?(type==='login'?'Signing in...': 'Signing up...'):'Submit'}}
           </button>

@@ -18,8 +18,9 @@ import {environment} from '../environments/environment'
 import {AngularFireAuthModule} from 'angularfire2/auth'
 import {ProfileComponent} from './profile/profile.component'
 import {ErrorComponent} from './error/error.component'
-import {EditableItemComponent} from './components/editable-item/editable-item.component';
-import { DogListComponent } from './components/dog-list/dog-list.component'
+import {EditableItemComponent} from './components/editable-item/editable-item.component'
+import {DogListComponent} from './components/dog-list/dog-list.component'
+import {PhaserComponent} from './phaser/phaser.component'
 
 @NgModule({
   declarations: [

@@ -30,7 +30,7 @@ export class LoginComponent extends LoginPhaser implements OnInit {
       await this.handleSubmit()
       this.goto.home().then()
     } catch (e) {
-      this.resetPhase()
+      this.phase.reset()
       this.notMatch = true
       this.account.password = null
     }

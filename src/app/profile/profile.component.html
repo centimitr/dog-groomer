@@ -17,8 +17,9 @@
         <app-dog-list style="width: 100%;" [dogs]="profile.dogs" [loaded]="loaded" [(selected)]="dog"
                       (add)="addDog()"></app-dog-list>
 
-        <div class="flex-row" *ngIf="dog">
-          <form style="margin-top: 38px">
+        <div class="flex-column" *ngIf="dog">
+          <h3>Edit {{dog.name}}'s Profile</h3>
+          <form style="margin-top: 12px">
 
             <app-editable-item label="Name"
                                [(value)]="dog.name"

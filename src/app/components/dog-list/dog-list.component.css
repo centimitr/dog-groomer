@@ -21,13 +21,29 @@
   border: 1px solid #cccccc;
   border-radius: 8px;
   margin-bottom: 8px;
+  cursor: pointer;
 }
 
 .dog-name {
   line-height: 16px;
+  font-size: 13px;
   color: #666666;
   max-width: 96px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+.dog-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  font-size: 34px;
+  cursor: pointer;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  color: #666666;
+  opacity: .6;
 }
