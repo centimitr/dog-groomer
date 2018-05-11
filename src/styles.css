@@ -51,6 +51,11 @@ input, textarea {
   position: relative;
 }
 
+.page .page-container .page-container-no-background {
+  border: none !important;
+  background: none !important;
+}
+
 .page .page-container.page-container-narrow {
   max-width: 340px;
   margin: 80px 0;

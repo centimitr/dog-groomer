@@ -15,11 +15,11 @@ export class AppComponent {
     // {href: '/login', text: 'Form - Login - email, password'},
     // {href: '/', text: 'User Dashboard'},
     // {href: '/info', text: 'Form - Edit User Information - name, home address, multiple contact phone numbers, dog name, breed, dob'},
-    {href: '/book', text: 'Form - Make an appointment - select dog, select time (90 min), groom options, note'},
-    {href: '/', text: 'List - Appointment History - cancel, re-schedule'},
+    // {href: '/book', text: 'Form - Make an appointment - select dog, select time (90 min), groom options, note'},
+    // {href: '/', text: 'List - Appointment History - cancel, re-schedule'},
     // {href: '/', text: 'Groomer Dashboard'},
-    {href: '/', text: 'List - Schedule'},
-    {href: '/', text: 'Feature - Email notification'},
+    // {href: '/', text: 'List - Schedule'},
+    // {href: '/', text: 'Feature - Email notification'},
   ]
 
   constructor(public session: SessionService, public goto: GotoService) {

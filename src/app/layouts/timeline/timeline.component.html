@@ -1,6 +1,13 @@
 <!--suppress JSUnresolvedVariable -->
 <div class="page">
 
+  <section class="page-container page-container-no-background page-container-no-padding"
+           style="background: none;border: none;text-align: center">
+    <h2 *ngIf="session.isGroomer">Schedule</h2>
+    <h2 *ngIf="session.isClient">Latest Appointments</h2>
+    <div class="description">Here is your latest appointments.</div>
+  </section>
+
   <section class="page-container page-container-no-padding card" *ngFor="let ap of appointments">
     <header class="card-header">
       <div class="dog-info">{{master(ap)?.fullname||'?'}}'s {{dog(ap)?.breed}}</div>

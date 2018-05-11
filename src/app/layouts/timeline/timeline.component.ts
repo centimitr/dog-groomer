@@ -9,18 +9,6 @@ import {Profile, ProfileAppointment} from '../../services/profile'
 })
 export class TimelineComponent implements OnInit {
 
-  items = [{
-    kind: 'Alaska',
-    date: 'Friday, 4 May 2018',
-    timeSlot: '14:00 - 18:00',
-    services: [
-      'normal groom',
-      'normal groom',
-      'normal groom',
-      'normal groom'
-    ]
-  }]
-
   masters = new Map()
   dogs = new Map()
   appointments: ProfileAppointment[]
@@ -30,7 +18,6 @@ export class TimelineComponent implements OnInit {
       .valueChanges().subscribe(async (p: Profile) => {
       await this.updateStore(p.appointments)
       this.appointments = p.appointments
-      console.log(this.masters)
     })
   }
 
