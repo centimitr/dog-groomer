@@ -14,7 +14,7 @@
                       (add)="addDog()"></app-dog-list>
 
         <div class="dog-chosen">
-          <span *ngIf="dog">You choose to book service for {{dog.name}}.</span>
+          <span *ngIf="dog">You chose to book service for {{dog.name}}.</span>
         </div>
 
         <button class="btn" [disabled]="!dog" type="submit">Next</button>
@@ -23,6 +23,16 @@
       <!-- Time -->
       <form *ngSwitchCase="1" (submit)="phase.next()">
         <h3>Choose appointment time</h3>
+        <!--<input type="date" [value]="date" title="number">-->
+        <div class="date">{{date | date: 'mediumDate'}}</div>
+        <div class="time-slots">
+          <button class="time-slot" type="button"
+                  *ngFor="let sl of timeSlots"
+                  [disabled]="!availableTimeSlots.includes(sl)"
+                  [class.active]="slot===sl"
+                  (click)="slot=(slot===sl?null:sl) ">{{sl}}
+          </button>
+        </div>
 
         <div class="btns">
           <button class="btn" (click)="phase.prev()">Prev</button>
@@ -62,7 +72,7 @@
       </form>
 
       <!-- Summary -->
-      <form *ngSwitchCase="3" (submit)="submit()">
+      <form *ngSwitchCase="3">
         <h3>Summary</h3>
         <table class="summary">
           <tr>
@@ -70,8 +80,12 @@
             <td class="value">{{dog.name}}</td>
           </tr>
           <tr>
+            <td class="name">Date</td>
+            <td class="value">{{date | date:'fullDate'}}</td>
+          </tr>
+          <tr>
             <td class="name">Time</td>
-            <td class="value">{{time}}</td>
+            <td class="value">{{slot}}</td>
           </tr>
           <tr>
             <td class="name">Services</td>
@@ -81,13 +95,21 @@
           </tr>
           <tr>
             <td class="name">Note</td>
-            <td class="value">{{note}}</td>
+            <td class="value">{{note.length?note:'-'}}</td>
           </tr>
         </table>
         <div class="btns">
-          <button class="btn" (click)="phase.prev()">Prev</button>
-          <button class="btn" type="submit">Submit</button>
+          <button class="btn" (click)="phase.prev()" [disabled]="submitting">Prev</button>
+          <button class="btn" type="button" (click)="submit()" [disabled]="submitting">
+            {{submitting?'Submitting...':'Submit'}}
+          </button>
         </div>
+      </form>
+
+      <!-- Result -->
+      <form *ngSwitchCase="4">
+        <h3>Congratulations!</h3>
+        <div class="description">Your appointment has been approved successfully.</div>
       </form>
 
     </ng-container>

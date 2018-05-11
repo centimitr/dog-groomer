@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core'
-import {SessionService} from '../session.service'
+import {SessionService} from '../../services/session.service'
 import {timer} from 'rxjs/observable/timer'
 import {flatMap, map, take} from 'rxjs/operators'
-import {GotoService} from '../goto.service'
+import {GotoService} from '../../services/goto.service'
 
 @Component({
   selector: 'app-error',

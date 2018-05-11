@@ -1,0 +1,38 @@
+<!--suppress JSUnresolvedVariable -->
+<div class="page">
+
+  <section class="page-container page-container-no-padding card" *ngFor="let ap of appointments">
+    <header class="card-header">
+      <div class="dog-info">{{master(ap)?.fullname||'?'}}'s {{dog(ap)?.breed}}</div>
+      <div class="dog-name">{{dog(ap)?.name}}</div>
+    </header>
+    <section class="card-main">
+      <div class="time">
+        <span>{{ap.date}}</span>
+        <span style="margin-left: 6px">{{ap.timeslot}}</span>
+      </div>
+      <ul class="services">
+        <li class="service" *ngFor="let svc of ap.services">{{svc}}</li>
+      </ul>
+      <div style="margin-top: 12px" *ngIf="session.isGroomer">
+        <div class="flex-row"><span style="margin-right: 8px">Address: </span><span>{{master(ap)?.address}}</span></div>
+        <div class="flex-row">
+          <!--<span style="margin-right: 8px">Contacts: </span>-->
+          <div>
+            <div *ngFor="let phone of master(ap)?.phones">
+              <span style="text-transform: capitalize">{{phone.name}}</span>
+              <span> - {{phone.number}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="card-bottom" *ngIf="session.isClient">
+      <div class="toolbar">
+        <a class="item">Re-schedule</a>
+        <a class="item">Cancel</a>
+      </div>
+    </footer>
+  </section>
+
+</div>

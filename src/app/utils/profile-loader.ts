@@ -1,10 +1,11 @@
 import {OnInit} from '@angular/core'
-import {Profile, ProfileDog, SessionService} from './session.service'
+import {SessionService} from '../services/session.service'
+import {Profile, ProfileDog} from '../services/profile'
 
 export class ProfileLoader implements OnInit {
 
   loaded = false
-  profile = new Profile()
+  profile: Profile = new Profile()
   dog: ProfileDog
   protected _doc
 

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
-import {ProfileDog} from '../../session.service'
+import {ProfileDog} from '../../services/profile'
 
 @Component({
   selector: 'app-dog-list',

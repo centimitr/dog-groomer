@@ -2,10 +2,13 @@ import {Injectable} from '@angular/core'
 import {AngularFirestore} from 'angularfire2/firestore'
 import {AngularFireAuth} from 'angularfire2/auth'
 import {GotoService} from './goto.service'
-import {Lock} from './lock'
+import {Lock} from '../utils/lock'
 import * as firebase from 'firebase'
+
 import {firestore} from 'firebase'
 import {AngularFirestoreDocument} from 'angularfire2/firestore/document/document'
+import {AngularFirestoreCollection} from 'angularfire2/firestore/collection/collection'
+import {Profile} from './profile'
 
 @Injectable()
 export class SessionService {
@@ -52,22 +55,54 @@ export class SessionService {
       next: user => {
         if (!user) {
           this.role = 'visitor'
-          // if (this.redirectToLogin) {
-          //   this.redirectToLogin = false
-          //   this.goto.login().then()
-          //   return
-          // }
+          this.loginLock.lock()
           this.goto.home().then()
           return
         }
-        this.role = 'client'
-        this.user = user
-        console.log(this.user)
-        console.log(0)
-        this.loginLock.unlock()
+        this.user = user;
+        (async () => {
+          let profile = <Profile>await this.getProfile()
+          if (!profile) {
+            profile = Profile.create(this.user.uid)
+            await this.profile().set(Profile.object(profile))
+          }
+          this.role = profile.role
+          this.loginLock.unlock()
+        })()
       }
     })
   }
+
+  getProfile(uid?: string) {
+    let resolve
+    const p = new Promise(r => resolve = r)
+    this.profile(uid).valueChanges().subscribe({next: profile => resolve(profile)})
+    return p
+  }
+
+  // private async loadAuth() {
+  //   let resolve
+  //   const p = new Promise(r => resolve = r)
+  //   this._auth.authState.subscribe({
+  //     next: user => {
+  //       if (!user) {
+  //         this.role = 'visitor'
+  //         // if (this.redirectToLogin) {
+  //         //   this.redirectToLogin = false
+  //         //   this.goto.login().then()
+  //         //   return
+  //         // }
+  //         this.goto.home().then()
+  //         resolve()
+  //       }
+  //       this.user = user
+  //       console.log(this.user)
+  //       this.loginLock.unlock()
+  //       resolve()
+  //     }
+  //   })
+  //   return p
+  // }
 
   async requireLogin() {
     await this.loginLock.wait()
@@ -83,6 +118,18 @@ export class SessionService {
 
   isLoggedIn() {
     return ['client', 'groomer'].includes(this.role)
+  }
+
+  get isVisitor() {
+    return this.role === 'visitor'
+  }
+
+  get isClient() {
+    return this.role === 'client'
+  }
+
+  get isGroomer() {
+    return this.role === 'groomer'
   }
 
   async logout() {
@@ -101,37 +148,13 @@ export class SessionService {
     await this.loginLock.wait()
   }
 
-  profile() {
-    // IvyX6cxzl6QTkfvthMlA
-    return this.afs.collection('users').doc(this.user.uid)
+  profile(uid?: string) {
+    return this.afs.collection('users').doc(uid || this.user.uid)
   }
 
-}
-
-
-export class Profile {
-  fullname = ''
-  nickname = ''
-  address = ''
-  phones: ProfilePhone[] = []
-  dogs: ProfileDog[] = []
-
-  static object(p: Profile) {
-    const o = Object.assign({}, p)
-    o.phones = p.phones.map(item => Object.assign({}, item))
-    o.dogs = p.dogs.map(item => Object.assign({}, item))
-    return o
+  getGroomer() {
+    const uid = 'YG2FJxVICzRLD50S2K3RWFf8tio2'
+    return this.afs.collection('users').doc(uid)
   }
-}
 
-
-export class ProfileDog {
-  name = ''
-  breed = ''
-  dob = ''
-}
-
-export class ProfilePhone {
-  name = ''
-  number = ''
 }

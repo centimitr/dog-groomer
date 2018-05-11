@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
-import {ProfilePhone} from '../../session.service'
+import {ProfilePhone} from '../../services/profile'
 
 @Component({
   selector: 'app-editable-item',

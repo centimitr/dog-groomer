@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core'
-import {SessionService} from '../session.service'
-import {GotoService} from '../goto.service'
+import {SessionService} from '../../services/session.service'
+import {GotoService} from '../../services/goto.service'
 
 @Component({
   selector: 'app-index',

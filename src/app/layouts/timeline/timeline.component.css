@@ -4,10 +4,14 @@
   transition: all 100ms ease-out;
 }
 
+.card + .card {
+  margin-top: 38px;
+}
+
 .card:hover {
   transform: scale(1.02);
   border-radius: 8px;
-  box-shadow: 0 0 24px 0 rgba(0, 0, 0, .1);
+  box-shadow: 0 0 38px 0 rgba(0, 0, 0, .2);
 }
 
 .card:hover > *:last-child {
@@ -19,10 +23,11 @@
 }
 
 .card-main {
-  border-top: 1px solid #eee;
+  border-top: 1px solid #cccccc;
   background-color: #fcfcfc;
   /*background-color: #fffefa;*/
   padding: 22px 28px;
+  font-size: 13px;
   color: #666666;
   line-height: 22px;
 }

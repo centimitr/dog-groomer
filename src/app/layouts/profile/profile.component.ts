@@ -1,6 +1,7 @@
 import {Component} from '@angular/core'
-import {Profile, ProfileDog, SessionService} from '../session.service'
-import {ProfileLoader} from '../profile-loader'
+import {SessionService} from '../../services/session.service'
+import {ProfileLoader} from '../../utils/profile-loader'
+import {Profile, ProfileDog} from '../../services/profile'
 
 @Component({
   selector: 'app-profile',
@@ -37,7 +38,7 @@ export class ProfileComponent extends ProfileLoader {
   }
 
   addDog() {
-    const dog = new ProfileDog()
+    const dog = ProfileDog.create()
     this.profile.dogs.push(dog)
     this.dog = dog
     this.dogEditable = true

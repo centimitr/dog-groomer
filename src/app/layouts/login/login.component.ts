@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core'
-import {GotoService} from '../goto.service'
-import {LoginPhaser} from '../login-phaser'
-import {SessionService} from '../session.service'
+import {GotoService} from '../../services/goto.service'
+import {LoginPhaser} from '../../utils/login-phaser'
+import {SessionService} from '../../services/session.service'
 
 @Component({
   selector: 'app-login',

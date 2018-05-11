@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core'
 import {Routes, RouterModule} from '@angular/router'
-import {IndexComponent} from './index/index.component'
-import {BookComponent} from './book/book.component'
-import {LoginComponent} from './login/login.component'
-import {RegisterComponent} from './login/register/register.component'
-import {ProfileComponent} from './profile/profile.component'
-import {ErrorComponent} from './error/error.component'
+import {IndexComponent} from './layouts/index/index.component'
+import {BookComponent} from './layouts/book/book.component'
+import {LoginComponent} from './layouts/login/login.component'
+import {RegisterComponent} from './layouts/login/register/register.component'
+import {ProfileComponent} from './layouts/profile/profile.component'
+import {ErrorComponent} from './layouts/error/error.component'
 
 const routes: Routes = [
   {path: '', component: IndexComponent},

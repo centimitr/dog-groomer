@@ -1,7 +1,7 @@
 import {Component} from '@angular/core'
-import {SessionService} from './session.service'
+import {SessionService} from './services/session.service'
 import {Router} from '@angular/router'
-import {GotoService} from './goto.service'
+import {GotoService} from './services/goto.service'
 
 @Component({
   selector: 'app-root',
