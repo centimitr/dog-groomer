@@ -6,7 +6,9 @@
     <h2 *ngIf="session.isGroomer">Schedule</h2>
     <h2 *ngIf="session.isClient">Latest Appointments</h2>
     <div class="description">Here is your latest appointments.</div>
-    <div class="description" *ngIf="!appointments.length">You don't have an appointment now, please <a (click)="goto.book().then()">book one</a>.</div>
+    <div class="description" *ngIf="session.isClient && !appointments.length">You don't have an appointment now, please
+      <a (click)="goto.book().then()">book one</a>.
+    </div>
   </section>
 
   <section class="page-container page-container-no-padding card" *ngFor="let ap of appointments">

@@ -4,10 +4,6 @@ import {AngularFireAuth} from 'angularfire2/auth'
 import {GotoService} from './goto.service'
 import {Lock} from '../utils/lock'
 import * as firebase from 'firebase'
-
-import {firestore} from 'firebase'
-import {AngularFirestoreDocument} from 'angularfire2/firestore/document/document'
-import {AngularFirestoreCollection} from 'angularfire2/firestore/collection/collection'
 import {Profile} from './profile'
 
 @Injectable()
@@ -80,30 +76,6 @@ export class SessionService {
     return p
   }
 
-  // private async loadAuth() {
-  //   let resolve
-  //   const p = new Promise(r => resolve = r)
-  //   this._auth.authState.subscribe({
-  //     next: user => {
-  //       if (!user) {
-  //         this.role = 'visitor'
-  //         // if (this.redirectToLogin) {
-  //         //   this.redirectToLogin = false
-  //         //   this.goto.login().then()
-  //         //   return
-  //         // }
-  //         this.goto.home().then()
-  //         resolve()
-  //       }
-  //       this.user = user
-  //       console.log(this.user)
-  //       this.loginLock.unlock()
-  //       resolve()
-  //     }
-  //   })
-  //   return p
-  // }
-
   async requireLogin() {
     await this.loginLock.wait()
     if (this.isLoggedIn()) {
@@ -153,7 +125,7 @@ export class SessionService {
   }
 
   getGroomer() {
-    const uid = 'YG2FJxVICzRLD50S2K3RWFf8tio2'
+    const uid = 'mbvm6wIlZAhjS21pw3eG49WoELl1'
     return this.afs.collection('users').doc(uid)
   }
 
