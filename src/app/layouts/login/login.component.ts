@@ -28,7 +28,7 @@ export class LoginComponent extends LoginPhaser implements OnInit {
     this.submitting = true
     try {
       await this.handleSubmit()
-      this.goto.home().then()
+      await this.goto.home()
     } catch (e) {
       this.phase.reset()
       this.notMatch = true

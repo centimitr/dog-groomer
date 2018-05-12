@@ -1,0 +1,8 @@
+.loading-text {
+  line-height: 480px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  color: #888;
+  font-size: 18px;
+  text-transform: capitalize;
+}

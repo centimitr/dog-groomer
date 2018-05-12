@@ -12,7 +12,7 @@
     Tom's Grooming
   </div>
   <div class="session-bar">
-    <button *ngIf="!session.isLoggedIn()" (click)="goto.login().then()">login</button>
+    <button *ngIf="session.isVisitor" (click)="goto.login().then()">login</button>
     <ng-container *ngIf="session.isLoggedIn()">
       <button (click)="goto.book().then()" *ngIf="session.isClient">Book a service</button>
       <button (click)="goto.home().then()">
