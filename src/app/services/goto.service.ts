@@ -4,6 +4,8 @@ import {Router} from '@angular/router'
 @Injectable()
 export class GotoService {
 
+  showDog = false
+
   constructor(private router: Router) {
   }
 
@@ -25,6 +27,10 @@ export class GotoService {
 
   book() {
     return this.goto('book')
+  }
+
+  toggleDogProfile() {
+    this.showDog = !this.showDog
   }
 
   profile() {

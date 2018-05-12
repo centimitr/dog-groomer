@@ -37,7 +37,7 @@ export class BookComponent extends ProfileLoader implements OnInit {
 
   async ngOnInit() {
     super.ngOnInit().then()
-    this.phase.phase = 1
+    // this.phase.phase = 1
     const doc = this.session.getGroomer()
     doc.valueChanges().subscribe((v: Profile) => {
       if (v) {
@@ -48,6 +48,7 @@ export class BookComponent extends ProfileLoader implements OnInit {
     })
     this._groomerDoc = doc
   }
+
   //
   // refreshAvailableTimeSlots() {
   //   const sameDate = (mDate, date) => mediumDate(date) === mDate
@@ -60,6 +61,7 @@ export class BookComponent extends ProfileLoader implements OnInit {
   // }
 
   addDog() {
+    this.goto.toggleDogProfile()
     this.goto.profile().then()
   }
 

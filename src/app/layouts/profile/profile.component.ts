@@ -2,6 +2,7 @@ import {Component} from '@angular/core'
 import {SessionService} from '../../services/session.service'
 import {ProfileLoader} from '../../utils/profile-loader'
 import {Profile, ProfileDog} from '../../services/profile'
+import {GotoService} from '../../services/goto.service'
 
 @Component({
   selector: 'app-profile',
@@ -14,8 +15,13 @@ export class ProfileComponent extends ProfileLoader {
   editable = false
   dogEditable = false
 
-  constructor(public session: SessionService) {
+  constructor(public session: SessionService, public goto: GotoService) {
     super(session)
+
+    if (this.goto.showDog) {
+      this.tab = 1
+      this.goto.toggleDogProfile()
+    }
   }
 
   updateProfile() {

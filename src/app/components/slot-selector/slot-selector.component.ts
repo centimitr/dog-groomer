@@ -4,6 +4,8 @@ import {Profile} from '../../services/profile'
 const mediumDate = function (date: Date) {
   return date.toISOString().slice(0, 10)
 }
+const second = 1000
+const day = 24 * 60 * 60 * second
 
 @Component({
   selector: 'app-slot-selector',
@@ -68,6 +70,22 @@ export class SlotSelectorComponent implements OnInit {
 
   invalid() {
     return !this._slot
+  }
+
+  canPrevDate() {
+    const now = mediumDate(new Date())
+    const to = mediumDate(new Date(this.date.getTime()))
+    return to <= now
+  }
+
+  prevDate() {
+    this.date = new Date(this.date.getTime() - day)
+    this.refreshAvailableTimeSlots()
+  }
+
+  nextDate() {
+    this.date = new Date(this.date.getTime() + day)
+    this.refreshAvailableTimeSlots()
   }
 
 }

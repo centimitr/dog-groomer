@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core'
 import {SessionService} from '../../services/session.service'
 import {Profile, ProfileAppointment} from '../../services/profile'
 import {Toggles} from '../../utils/toggles'
+import {GotoService} from '../../services/goto.service'
 
 @Component({
   selector: 'app-timeline',
@@ -17,11 +18,11 @@ export class TimelineComponent implements OnInit {
   _groomerDoc
   groomer
 
-  constructor(public session: SessionService) {
+  constructor(public session: SessionService, public goto: GotoService) {
     const doc = this.session.getGroomer()
     doc.valueChanges().subscribe(async (p: Profile) => {
       await this.updateStore(p.appointments)
-      this.appointments = this.sortAppointments(p.appointments)
+      this.appointments = this.filterAps(this.sortAps(p.appointments))
       this.groomer = p
     })
     this._groomerDoc = doc
@@ -30,7 +31,14 @@ export class TimelineComponent implements OnInit {
   ngOnInit() {
   }
 
-  sortAppointments(aps: ProfileAppointment[]) {
+  filterAps(aps: ProfileAppointment[]) {
+    if (this.session.isClient) {
+      return aps = aps.filter(ap => ap.master === this.session.user.uid)
+    }
+    return aps
+  }
+
+  sortAps(aps: ProfileAppointment[]) {
     return aps.sort((a, b) => {
       if (a.date < b.date) {
         return 1

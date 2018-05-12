@@ -3,12 +3,36 @@
   flex-flow: row wrap;
 }
 
-.date {
-  font-size: 18px;
+.date-row {
+  display: flex;
+  flex-flow: row;
+  justify-content: left;
   margin-top: 32px;
   margin-bottom: 22px;
+  font-size: 18px;
   font-weight: 600;
-  color: #666666;
+  color: #444;
+}
+
+.date {
+}
+
+.date-btns {
+  margin-left: 14px;
+  display: flex;
+  flex-flow: row;
+}
+
+.date-btn {
+  margin-left: 4px;
+  color: #666;
+  cursor: pointer;
+  background: none;
+  border: none;
+  height: auto;
+  line-height: normal;
+  font-size: 16px;
+  padding: 0 4px;
 }
 
 .time-slots {

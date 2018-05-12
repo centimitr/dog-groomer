@@ -1,4 +1,12 @@
-<div class="date">{{date | date: 'mediumDate'}}</div>
+<div class="date-row">
+  <div class="date">
+    <span>{{date | date: 'mediumDate'}}</span>
+  </div>
+  <div class="date-btns">
+    <button type="button" class="date-btn" [disabled]="canPrevDate()" (click)="prevDate()">Prev</button>
+    <button type="button" class="date-btn" (click)="nextDate()">Next</button>
+  </div>
+</div>
 <div class="time-slots">
   <button class="time-slot" type="button"
           *ngFor="let sl of timeSlots"

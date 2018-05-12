@@ -101,6 +101,7 @@
       <form *ngSwitchCase="4">
         <h3>Congratulations!</h3>
         <div class="description">Your appointment has been approved successfully.</div>
+        <div class="description"><a (click)="goto.home().then()">Back to appointments history.</a></div>
       </form>
 
     </ng-container>
