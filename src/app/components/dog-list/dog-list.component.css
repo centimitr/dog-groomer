@@ -48,3 +48,27 @@
   color: #666666;
   opacity: .6;
 }
+
+.no-dog {
+  align-items: center;
+  justify-content: center;
+  height: 128px;
+  border: 1px dashed #cccccc;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.no-dog-text {
+  pointer-events: none;
+  line-height: 38px;
+  color: #888;
+}
+
+.no-dog-link {
+  pointer-events: none;
+}
+
+.loading-text {
+  line-height: 64px;
+  color: #888888;
+}

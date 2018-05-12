@@ -25,7 +25,6 @@
       <div style="margin-top: 12px" *ngIf="session.isGroomer">
         <div class="flex-row"><span style="margin-right: 8px">Address: </span><span>{{master(ap)?.address}}</span></div>
         <div class="flex-row">
-          <!--<span style="margin-right: 8px">Contacts: </span>-->
           <div>
             <div *ngFor="let phone of master(ap)?.phones">
               <span style="text-transform: capitalize">{{phone.name}}</span>

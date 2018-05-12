@@ -9,13 +9,11 @@
     </div>
     <div class="dog-add" (click)="add.emit()"><span style="margin-top: -2px">+</span></div>
   </div>
-  <div *ngIf="!dogs.length" (click)="add.emit()"
-       class="flex-column"
-       style="align-items: center; justify-content: center; height: 128px; border: 1px dashed #cccccc;margin-top: 8px; cursor: pointer; ">
-    <div style="pointer-events: none; line-height: 38px; color: #888;"> No dogs recorded.</div>
-    <div style="pointer-events: none"><a>Add a dog</a></div>
+  <div *ngIf="!dogs.length" (click)="add.emit()" class="flex-column no-dog">
+    <div class="no-dog-text"> No dogs recorded.</div>
+    <div class="no-dog-link"><a>Add a dog</a></div>
   </div>
 </ng-container>
 <ng-container *ngIf="!loaded">
-  <div style="line-height: 64px; color: #888888;">loading...</div>
+  <div class="loading-text">loading...</div>
 </ng-container>
