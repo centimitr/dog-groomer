@@ -19,7 +19,8 @@ import {AngularFireAuthModule} from 'angularfire2/auth'
 import {ProfileComponent} from './layouts/profile/profile.component'
 import {ErrorComponent} from './layouts/error/error.component'
 import {EditableItemComponent} from './components/editable-item/editable-item.component'
-import {DogListComponent} from './components/dog-list/dog-list.component'
+import {DogListComponent} from './components/dog-list/dog-list.component';
+import { SlotSelectorComponent } from './components/slot-selector/slot-selector.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {DogListComponent} from './components/dog-list/dog-list.component'
     ErrorComponent,
     EditableItemComponent,
     DogListComponent,
+    SlotSelectorComponent,
   ],
   imports: [
     BrowserModule,

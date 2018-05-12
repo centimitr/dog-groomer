@@ -48,6 +48,7 @@ export class ProfilePhone {
 }
 
 export class ProfileAppointment {
+  id = ''
   master = ''
   date = ''
   timeslot = ''
@@ -57,6 +58,7 @@ export class ProfileAppointment {
 
   static from(profile: Profile, dog: ProfileDog, date: Date, slot, services, note) {
     const a = new ProfileAppointment()
+    a.id = uuid()
     a.master = profile.uid
     a.dog = dog.id
     a.date = date.toISOString().slice(0, 10)

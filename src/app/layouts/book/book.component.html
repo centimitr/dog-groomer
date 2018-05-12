@@ -24,16 +24,7 @@
       <form *ngSwitchCase="1" (submit)="phase.next()">
         <h3>Choose appointment time</h3>
         <!--<input type="date" [value]="date" title="number">-->
-        <div class="date">{{date | date: 'mediumDate'}}</div>
-        <div class="time-slots">
-          <button class="time-slot" type="button"
-                  *ngFor="let sl of timeSlots"
-                  [disabled]="!availableTimeSlots.includes(sl)"
-                  [class.active]="slot===sl"
-                  (click)="slot=(slot===sl?null:sl) ">{{sl}}
-          </button>
-        </div>
-
+        <app-slot-selector [groomer]="groomer" [(date)]="date" [(slot)]="slot"></app-slot-selector>
         <div class="btns">
           <button class="btn" (click)="phase.prev()">Prev</button>
           <button class="btn" type="submit">Next</button>

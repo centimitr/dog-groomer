@@ -1,0 +1,9 @@
+<div class="date">{{date | date: 'mediumDate'}}</div>
+<div class="time-slots">
+  <button class="time-slot" type="button"
+          *ngFor="let sl of timeSlots"
+          [disabled]="!availableTimeSlots.includes(sl)"
+          [class.active]="slot===sl"
+          (click)="slot=(slot===sl?null:sl) ">{{sl}}
+  </button>
+</div>

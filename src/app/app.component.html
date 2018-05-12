@@ -14,8 +14,11 @@
   <div class="session-bar">
     <button *ngIf="!session.isLoggedIn()" (click)="goto.login().then()">login</button>
     <ng-container *ngIf="session.isLoggedIn()">
-      <button (click)="goto.home().then()">Dashboard</button>
       <button (click)="goto.book().then()" *ngIf="session.isClient">Book a service</button>
+      <button (click)="goto.home().then()">
+        <span *ngIf="session.isGroomer">Schedule</span>
+        <span *ngIf="session.isClient">Appointments</span>
+      </button>
       <button (click)="goto.profile().then()" *ngIf="session.isClient">{{session.user.email}}</button>
       <button (click)="session.logout().then()">Sign out</button>
     </ng-container>

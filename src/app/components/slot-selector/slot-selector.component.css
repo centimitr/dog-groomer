@@ -1,0 +1,38 @@
+.time-slots {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.date {
+  font-size: 18px;
+  margin-top: 32px;
+  margin-bottom: 22px;
+  font-weight: 600;
+  color: #666666;
+}
+
+.time-slots {
+  margin-bottom: 18px;
+}
+
+.time-slot {
+  height: 38px;
+  width: 120px;
+  max-width: 120px;
+  min-width: 120px;
+  line-height: 38px;
+  background-color: #e8e8e8;
+  text-align: center;
+  margin-right: 12px;
+  margin-left: 0;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.time-slot.active {
+  color: white;
+  background-color: #3d7eed;
+}
+
+.time-slot + .time-slot {
+}

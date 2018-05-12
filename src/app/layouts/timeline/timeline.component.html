@@ -34,10 +34,17 @@
         </div>
       </div>
     </section>
-    <footer class="card-bottom" *ngIf="session.isClient">
+    <footer class="card-bottom" [hidden]="!session.isClient">
       <div class="toolbar">
-        <a class="item">Re-schedule</a>
-        <a class="item">Cancel</a>
+        <a class="item" (click)="reschedules.toggle(ap.id)">Re-schedule</a>
+        <a class="item" (click)="cancelAppointment(ap.id)">Cancel</a>
+      </div>
+      <div style="padding: 0 28px;margin-top: -18px" *ngIf="reschedules.active(ap.id)">
+        <app-slot-selector [groomer]="groomer" #slotSelector></app-slot-selector>
+        <button class="btn" style="margin-top: -12px; margin-bottom: 18px; padding: 0 12px;"
+                [disabled]="slotSelector.invalid()"
+                (click)="updateAppointment(ap.id, slotSelector.date, slotSelector.slot)">Update
+        </button>
       </div>
     </footer>
   </section>
