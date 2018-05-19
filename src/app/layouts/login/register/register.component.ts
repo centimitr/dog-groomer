@@ -15,6 +15,7 @@ export class RegisterComponent extends LoginComponent implements OnInit {
 
   async handleSubmit() {
     await this.session.register(this.account.email, this.account.password)
+    await this.session.loginLock.wait()
   }
 
 }

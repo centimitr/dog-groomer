@@ -30,22 +30,25 @@ export class BookComponent extends ProfileLoader implements OnInit {
     const doc = this.session.getGroomer()
     doc.valueChanges().subscribe((v: Profile) => {
       if (v) {
-        console.log(v)
         this.groomer = v
       }
     })
     this._groomerDoc = doc
   }
+
   addDog() {
     this.goto.toggleDogProfile()
     this.goto.profile().then()
   }
 
   toggleOption(id) {
+    // make this single selection
     if (this.options.includes(id)) {
-      this.options = this.options.filter(_id => _id !== id)
+      // this.options = this.options.filter(_id => _id !== id)
+      this.options = []
     } else {
-      this.options.push(id)
+      // this.options.push(id)
+      this.options = [id]
     }
   }
 
@@ -55,6 +58,7 @@ export class BookComponent extends ProfileLoader implements OnInit {
     if (!this.groomer.appointments) {
       this.groomer.appointments = []
     }
+    console.log(this.groomer.appointments)
     this.groomer.appointments.push(appointment)
     this._groomerDoc.set(Profile.object(this.groomer))
     this.submitting = false

@@ -106,6 +106,7 @@ export class SessionService {
 
   async logout() {
     await this._auth.auth.signOut()
+    this.loginLock.lock()
   }
 
   async login(email, password) {

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core'
 import {Profile} from '../../services/profile'
+import {DatePipe} from '@angular/common'
 
 const mediumDate = function (date: Date) {
   return date.toISOString().slice(0, 10)
@@ -64,6 +65,14 @@ export class SlotSelectorComponent implements OnInit {
       const curDateAppointments = this.groomer.appointments.filter(ap => sameDate(ap.date, this.date))
       const candidates = Array.from(this.timeSlots)
       const unavailableSlots = curDateAppointments.map(ap => ap.timeslot)
+      if (mediumDate(this.date) === mediumDate(new Date())) {
+        const dp = new DatePipe('en-US')
+        this.timeSlots.forEach(slot => {
+          if (dp.transform(new Date(), 'HH:mm') >= slot.slice(0, 5)) {
+            unavailableSlots.push(slot)
+          }
+        })
+      }
       this.availableTimeSlots = candidates.filter(can => !unavailableSlots.includes(can))
     }
   }

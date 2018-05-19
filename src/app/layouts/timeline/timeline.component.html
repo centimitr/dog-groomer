@@ -6,7 +6,7 @@
     <h2 *ngIf="session.isGroomer">Schedule</h2>
     <h2 *ngIf="session.isClient">Latest Appointments</h2>
     <div class="description">Here is your latest appointments.</div>
-    <div class="description" *ngIf="session.isClient && !appointments.length">You don't have an appointment now, please
+    <div class="description" *ngIf="session.isClient && !appointments?.length">You don't have an appointment now, please
       <a (click)="goto.book().then()">book one</a>.
     </div>
   </section>
@@ -24,9 +24,12 @@
       <ul class="services">
         <li class="service" *ngFor="let svc of ap.services">{{svc}}</li>
       </ul>
-      <div style="margin-top: 12px" *ngIf="session.isGroomer">
-        <div class="flex-row"><span style="margin-right: 8px">Address: </span><span>{{master(ap)?.address}}</span></div>
-        <div class="flex-row">
+      <div style="margin-top: 12px">
+        <div class="flex-row"><span style="margin-right: 8px">Note: </span><span>{{ap.note}}</span>
+        </div>
+        <div class="flex-row" *ngIf="session.isGroomer"><span style="margin-right: 8px">Address: </span><span>{{master(ap)?.address}}</span>
+        </div>
+        <div class="flex-row" *ngIf="session.isGroomer">
           <div>
             <div *ngFor="let phone of master(ap)?.phones">
               <span style="text-transform: capitalize">{{phone.name}}</span>

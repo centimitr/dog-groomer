@@ -5,7 +5,7 @@
       <ng-container *ngSwitchCase="'login'">
         <h2>Sign in</h2>
         <div class="description">Login to manage your appointments.</div>
-    </ng-container>
+      </ng-container>
       <ng-container *ngSwitchCase="'register'">
         <h2>Create account</h2>
         <div class="description">Register an account to book service.</div>
@@ -23,7 +23,6 @@
       <form *ngSwitchCase="0" class="form-control" (submit)="email.valid&&phase.next()">
         <input type="email" placeholder="someone@example.com" name="email"
                required autofocus email
-               pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}"
                autocomplete="username"
                (keyup)="notMatch=false"
                #email="ngModel" [(ngModel)]="account.email">
@@ -32,7 +31,7 @@
 
       <form *ngSwitchCase="1" class="form-control" (submit)="submit().then()">
         <input type="password" placeholder="password" name="password"
-               minlength="4" maxlength="20" required autofocus
+               autofocus minlength="6" maxlength="20" required
                (keyup)="notMatch=false"
                [autocomplete]="type === 'login'? 'current-password': 'new-password'"
                #password="ngModel" [(ngModel)]="account.password">

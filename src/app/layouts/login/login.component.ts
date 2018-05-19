@@ -22,6 +22,7 @@ export class LoginComponent extends LoginPhaser implements OnInit {
 
   protected async handleSubmit() {
     await this.session.login(this.account.email, this.account.password)
+    await this.session.loginLock.wait()
   }
 
   async submit() {

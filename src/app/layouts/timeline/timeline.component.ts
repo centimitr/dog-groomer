@@ -79,13 +79,14 @@ export class TimelineComponent implements OnInit {
   updateAppointment(id, date, slot) {
     if (confirm('Confirm your re-schedule?')) {
       const p = Object.assign({}, this.groomer)
-      p['appointments'] = this.appointments.map(ap => {
+      p['appointments'] = p['appointments'].map(ap => {
         if (ap.id === id) {
           ap.date = date.toISOString().slice(0, 10)
           ap.timeslot = slot
         }
         return ap
       })
+      console.log(p)
       this._groomerDoc.set(p)
       this.reschedules.toggle(id)
     }
@@ -94,7 +95,8 @@ export class TimelineComponent implements OnInit {
   cancelAppointment(id) {
     if (confirm('Confirm your cancellation?')) {
       const p = Object.assign({}, this.groomer)
-      p['appointments'] = this.appointments.filter(ap => ap.id !== id)
+      p['appointments'] = p['appointments'].filter(ap => ap.id !== id)
+      console.log(p)
       this._groomerDoc.set(p)
     }
   }
