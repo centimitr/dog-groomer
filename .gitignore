@@ -9,6 +9,7 @@
 # dependencies
 /node_modules
 /deploy/functions/node_modules
+/deploy/_functions/node_modules
 
 # IDEs and editors
 /.idea
