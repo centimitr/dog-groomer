@@ -58,10 +58,11 @@ export class BookComponent extends ProfileLoader implements OnInit {
     if (!this.groomer.appointments) {
       this.groomer.appointments = []
     }
-    console.log(this.groomer.appointments)
     this.groomer.appointments.push(appointment)
     this._groomerDoc.set(Profile.object(this.groomer))
-    this.submitting = false
+    // this.submitting = false
     this.phase.next()
+    const name = this.profile.nickname || this.profile.fullname.split ? this.profile.fullname.split(' ')[0] : ''
+    this.session.sendEmail(name, this.profile.address, this.dog.name, this.date, this.slot, this.options, this.note).then()
   }
 }

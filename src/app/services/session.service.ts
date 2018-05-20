@@ -4,7 +4,8 @@ import {AngularFireAuth} from 'angularfire2/auth'
 import {GotoService} from './goto.service'
 import {Lock} from '../utils/lock'
 import * as firebase from 'firebase'
-import {Profile} from './profile'
+import {Profile, ProfileAppointment} from './profile'
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 
 @Injectable()
 export class SessionService {
@@ -46,7 +47,7 @@ export class SessionService {
 
   // redirectToLogin = false
 
-  constructor(public afs: AngularFirestore, public _auth: AngularFireAuth, public goto: GotoService) {
+  constructor(private http: HttpClient, public afs: AngularFirestore, public _auth: AngularFireAuth, public goto: GotoService) {
     this._auth.authState.subscribe({
       next: user => {
         if (!user) {
@@ -128,6 +129,49 @@ export class SessionService {
   getGroomer() {
     const uid = 'mbvm6wIlZAhjS21pw3eG49WoELl1'
     return this.afs.collection('users').doc(uid)
+  }
+
+  sendEmail(masterName, masterAddress, dogName, date, slot, services, note) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET,POST',
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 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'
+      })
+    }
+    const email = `Hi ${masterName},
+
+
+You have successfully book an on-site grooming service.
+
+
+Time: ${date.toISOString().slice(0, 10)} ${slot}
+
+Address: ${masterAddress}
+
+Dog: ${dogName}
+
+Services: ${services.join(', ')}
+
+Note: ${note || '-'}
+
+Check the appointment on https://dog.devbycm.com
+
+The Tom's Grooming Team
+
+`
+    return this.http.post<any>('https://api.sendgrid.com/v3/mail/send', {
+      personalizations: [{
+        to: [{email: this.user.email}]
+      }],
+      from: {email: 'notification@dog.devbycm.com'},
+      subject: `Tom's Grooming - Your Latest Appointment`,
+      content: [{
+        type: 'text/plain',
+        value: email
+      }]
+    }, httpOptions).toPromise()
   }
 
 }

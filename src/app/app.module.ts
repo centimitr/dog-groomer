@@ -21,6 +21,7 @@ import {ErrorComponent} from './layouts/error/error.component'
 import {EditableItemComponent} from './components/editable-item/editable-item.component'
 import {DogListComponent} from './components/dog-list/dog-list.component'
 import {SlotSelectorComponent} from './components/slot-selector/slot-selector.component'
+import {HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {SlotSelectorComponent} from './components/slot-selector/slot-selector.co
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
